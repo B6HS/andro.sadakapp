@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Crée le dépôt GitHub "sadaq-android" et pousse la branche courante.
+# Crée le dépôt GitHub (défaut : andro.sadak.app) et pousse la branche courante.
 # Prérequis : gh installé + `gh auth login` une fois.
 set -euo pipefail
 
-REPO_NAME="${1:-sadaq-android}"
+REPO_NAME="${1:-andro.sadak.app}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 

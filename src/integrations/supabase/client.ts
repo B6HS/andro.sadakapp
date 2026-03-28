@@ -7,7 +7,7 @@ const SUPABASE_PUBLISHABLE_KEY = import.meta.env
 
 if (!SUPABASE_URL?.length || !SUPABASE_PUBLISHABLE_KEY?.length) {
   throw new Error(
-    "Supabase : définissez VITE_SUPABASE_URL et VITE_SUPABASE_PUBLISHABLE_KEY (voir .env.example).",
+    "Supabase : définissez VITE_SUPABASE_URL et VITE_SUPABASE_PUBLISHABLE_KEY dans .env (voir .env.example). Clé anon : paramètres du projet sur supabase.com.",
   );
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Push du projet vers GitHub (dépôt sadaq-android par défaut).
+# Push du projet vers GitHub (dépôt andro.sadak.app par défaut).
 # Usage :
 #   ./scripts/push-github.sh                    # si origin existe déjà → push
 #   GITHUB_USER=moncompte ./scripts/push-github.sh
@@ -10,7 +10,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-REPO_NAME="${GITHUB_REPO:-sadaq-android}"
+REPO_NAME="${GITHUB_REPO:-andro.sadak.app}"
 
 if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
   echo "Des changements non commités — committez ou stash avant le push."
