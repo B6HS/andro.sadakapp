@@ -3,6 +3,8 @@ import { Outlet, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { TenantProvider, type TenantRow } from "@/contexts/TenantContext";
 import { setActiveBorneId } from "@/lib/borne-runtime";
+import { DEFAULT_TENANT_SLUG } from "@/lib/brand";
+import { getPublicAppUrl } from "@/lib/public-urls";
 
 /**
  * Charge l’association par slug URL (ex. iqraa, centresocial) et résout la borne par défaut.
@@ -29,7 +31,19 @@ export default function TenantLayout() {
 
       if (cancelled) return;
 
-      if (e1 || !t) {
+      if (e1) {
+        setTenant(null);
+        setEffectiveBorneId(null);
+        setError(
+          import.meta.env.DEV
+            ? `Erreur Supabase : ${e1.message}`
+            : "Erreur lors du chargement de l’association (vérifiez la base Supabase et les migrations).",
+        );
+        setLoading(false);
+        return;
+      }
+
+      if (!t) {
         setTenant(null);
         setEffectiveBorneId(null);
         setError("Association introuvable ou inactive");
@@ -114,7 +128,13 @@ export default function TenantLayout() {
       >
         <div>
           <p style={{ fontSize: 18, marginBottom: 8 }}>{error}</p>
-          <p style={{ fontSize: 14, color: "#64748b" }}>Vérifiez l’URL (ex. /android/iqraa/borne)</p>
+          <p style={{ fontSize: 14, color: "#64748b" }}>
+            Exemple d’URL : {getPublicAppUrl(`/${DEFAULT_TENANT_SLUG}/borne`)}
+            <br />
+            <span style={{ fontSize: 12 }}>
+              Si le projet Supabase est neuf, exécutez les migrations (`supabase/migrations`) pour créer les associations.
+            </span>
+          </p>
         </div>
       </div>
     );
