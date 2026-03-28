@@ -22,7 +22,8 @@ import { DEFAULT_TENANT_SLUG } from "@/lib/brand";
 
 const queryClient = new QueryClient();
 
-const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+const baseTrim = import.meta.env.BASE_URL.replace(/\/$/, "");
+const routerBasename = baseTrim === "" || baseTrim === "/" ? undefined : baseTrim;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

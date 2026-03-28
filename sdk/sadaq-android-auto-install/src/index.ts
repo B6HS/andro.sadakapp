@@ -3,7 +3,7 @@ export type OpenAutoInstallOptions = {
   baseUrl?: string;
   /**
    * Préfixe du déploiement Vite (React basename), ex. `/android`.
-   * Défaut : `/android` pour https://sadaq.app/android
+   * Défaut : `""` pour https://andro.sadak.app (base `/`) ; utiliser `/android` pour l’ancien chemin sur sadaq.app.
    */
   appBasePath?: string;
   /** Chemin du flux (défaut : /auto-install) */
@@ -26,7 +26,8 @@ function normalizePath(path: string): string {
  */
 export function buildAutoInstallUrl(options: OpenAutoInstallOptions = {}): string {
   const path = normalizePath(options.path ?? "/auto-install");
-  const appBase = normalizePath(options.appBasePath ?? "/android");
+  const raw = options.appBasePath ?? "";
+  const appBase = raw === "" ? "" : normalizePath(raw);
   const base = options.baseUrl != null ? normalizeBase(options.baseUrl) : "";
   return `${base}${appBase}${path}`;
 }

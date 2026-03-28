@@ -1,11 +1,23 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig(() => ({
-  /** Déployé sous https://sadaq.app/android/ */
-  base: "/android/",
+/** Ex. `/` pour https://andro.sadak.app/ ou `/android/` pour chemin sur sadaq.app */
+function normalizeBase(raw: string): string {
+  if (!raw || raw === "/") return "/";
+  const withSlash = raw.startsWith("/") ? raw : `/${raw}`;
+  return withSlash.endsWith("/") ? withSlash : `${withSlash}/`;
+}
+
+export default defineConfig(({ mode }) => {
+  const fileEnv = loadEnv(mode, process.cwd(), "");
+  const baseRaw =
+    process.env.VITE_BASE_PATH ?? fileEnv.VITE_BASE_PATH ?? "/android/";
+  const base = normalizeBase(baseRaw);
+
+  return {
+  base,
   server: {
     host: "::",
     /** Port dev local — ouvrir http://localhost:8787/android/ */
@@ -51,10 +63,10 @@ export default defineConfig(() => ({
         ],
       },
       manifest: {
-        name: "sadaq.app/android — Borne de don",
-        short_name: "sadaq.app/android",
-        description: "Borne de don — sadaq.app/android · myPOS · mode hors-ligne",
-        scope: "/android/",
+        name: "Sadaq — Borne de don",
+        short_name: "Sadaq",
+        description: "Borne de don — myPOS · mode hors-ligne",
+        scope: base,
         theme_color: "#10b981",
         background_color: "#000000",
         display: "standalone",
@@ -86,4 +98,5 @@ export default defineConfig(() => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-}));
+};
+});
