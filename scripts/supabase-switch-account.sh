@@ -5,7 +5,7 @@
 #   ./scripts/supabase-switch-account.sh
 #
 # Lier le repo au projet (optionnel, besoin du mot de passe Postgres du projet) :
-#   export SUPABASE_PROJECT_REF="oeczfyzawjkfnfnncgxz"
+#   export SUPABASE_PROJECT_REF="znjqfcvksyjdqbwunshv"
 #   export SUPABASE_DB_PASSWORD="..."       # Settings → Database
 #   ./scripts/supabase-switch-account.sh --link
 #
@@ -31,7 +31,7 @@ echo "OK — session CLI active. Projets accessibles :"
 npx supabase projects list
 
 if [[ "$LINK" == true ]]; then
-  REF="${SUPABASE_PROJECT_REF:-oeczfyzawjkfnfnncgxz}"
+  REF="${SUPABASE_PROJECT_REF:-znjqfcvksyjdqbwunshv}"
   if [[ -z "${SUPABASE_DB_PASSWORD:-}" ]]; then
     echo "Pour lier : export SUPABASE_DB_PASSWORD=... puis $0 --link"
     exit 0

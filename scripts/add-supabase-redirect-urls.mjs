@@ -12,7 +12,7 @@
  * DNS OVH (sadak.app) — à faire dans l’espace client (je ne peux pas me connecter à ta place) :
  *   Type A, nom « andro », valeur 76.76.21.21 (ou la valeur affichée par Vercel → Domaines → andro.sadak.app)
  */
-const PROJECT_REF = process.env.SUPABASE_PROJECT_REF || "oeczfyzawjkfnfnncgxz";
+const PROJECT_REF = process.env.SUPABASE_PROJECT_REF || "znjqfcvksyjdqbwunshv";
 const TOKEN = process.env.SUPABASE_ACCESS_TOKEN;
 const ADD = ["https://andro.sadak.app", "https://andro.sadak.app/**"];
 
