@@ -26,5 +26,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Lien : .vercel → andro.sadakapp/ (config projet Vercel)
 .vercel
+andro.sadakapp/
 supabase/.temp/

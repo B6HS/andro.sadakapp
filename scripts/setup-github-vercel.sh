@@ -3,7 +3,7 @@
 # Prérequis : gh installé + `gh auth login` une fois.
 set -euo pipefail
 
-REPO_NAME="${1:-andro.sadak.app}"
+REPO_NAME="${1:-andro.sadakapp}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
@@ -47,7 +47,7 @@ echo ""
 echo "OK — dépôt créé et code poussé."
 echo ""
 echo "Vercel — déploiement automatique :"
-echo "  1. https://vercel.com/dashboard → votre projet (ex. sadakapp-main-2)"
+echo "  1. https://vercel.com/dashboard → votre projet (ex. andro.sadakapp)"
 echo "  2. Settings → Git → Connect Git Repository"
 echo "  3. Choisir le dépôt $(gh api user -q .login)/$REPO_NAME, branche $BRANCH"
 echo "  4. Settings → Environment Variables : copier les VITE_* / Supabase depuis .env"
