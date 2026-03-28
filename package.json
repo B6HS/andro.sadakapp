@@ -13,7 +13,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "supabase:redirects": "node scripts/add-supabase-redirect-urls.mjs",
-    "vercel:sync-supabase-env": "node scripts/sync-vercel-supabase-env.mjs"
+    "db:push": "npx supabase db push",
+    "supabase:setup-remote": "bash scripts/setup-supabase-full.sh",
+    "vercel:sync-supabase-env": "node scripts/sync-vercel-supabase-env.mjs",
+    "release": "npm run vercel:sync-supabase-env && npx vercel deploy --prod --yes --non-interactive"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
