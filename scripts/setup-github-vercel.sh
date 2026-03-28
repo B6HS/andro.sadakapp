@@ -13,8 +13,18 @@ if ! command -v gh >/dev/null 2>&1; then
 fi
 
 if ! gh auth status >/dev/null 2>&1; then
-  echo "Connectez-vous à GitHub : gh auth login"
-  exit 1
+  TOKEN="${GITHUB_TOKEN:-${GH_TOKEN:-}}"
+  if [[ -n "$TOKEN" ]]; then
+    echo "$TOKEN" | gh auth login --with-token -h github.com 2>/dev/null || {
+      echo "Échec auth avec GITHUB_TOKEN — vérifiez le PAT (scope: repo)."
+      exit 1
+    }
+  else
+    echo "Aucune session GitHub. Choisissez une option :"
+    echo "  • Interactive : gh auth login"
+    echo "  • Avec un PAT : export GITHUB_TOKEN=ghp_... puis relancez ce script"
+    exit 1
+  fi
 fi
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
