@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "supabase:redirects": "node scripts/add-supabase-redirect-urls.mjs"
+    "supabase:redirects": "node scripts/add-supabase-redirect-urls.mjs",
+    "vercel:sync-supabase-env": "node scripts/sync-vercel-supabase-env.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

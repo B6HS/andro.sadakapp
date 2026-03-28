@@ -10,11 +10,29 @@ function normalizeBase(raw: string): string {
   return withSlash.endsWith("/") ? withSlash : `${withSlash}/`;
 }
 
+/** Hôte API Supabase pour Workbox (runtime cache) — suit VITE_SUPABASE_URL, pas d’ID en dur. */
+function supabaseApiHost(fileEnv: Record<string, string>): string {
+  const raw =
+    process.env.VITE_SUPABASE_URL ?? fileEnv.VITE_SUPABASE_URL ?? "";
+  try {
+    if (raw) return new URL(raw).hostname;
+  } catch {
+    /* ignore */
+  }
+  return "localhost";
+}
+
+function supabaseRestPattern(host: string, table: string): RegExp {
+  const h = host.replace(/\./g, "\\.");
+  return new RegExp(`^https://${h}/rest/v1/${table}`);
+}
+
 export default defineConfig(({ mode }) => {
   const fileEnv = loadEnv(mode, process.cwd(), "");
   const baseRaw =
     process.env.VITE_BASE_PATH ?? fileEnv.VITE_BASE_PATH ?? "/android/";
   const base = normalizeBase(baseRaw);
+  const sbHost = supabaseApiHost(fileEnv);
 
   return {
   base,
@@ -37,7 +55,7 @@ export default defineConfig(({ mode }) => {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/oeczfyzawjkfnfnncgxz\.supabase\.co\/rest\/v1\/causes/,
+            urlPattern: supabaseRestPattern(sbHost, "causes"),
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "causes-api-cache",
@@ -45,7 +63,7 @@ export default defineConfig(({ mode }) => {
             },
           },
           {
-            urlPattern: /^https:\/\/oeczfyzawjkfnfnncgxz\.supabase\.co\/rest\/v1\/settings/,
+            urlPattern: supabaseRestPattern(sbHost, "settings"),
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "settings-api-cache",

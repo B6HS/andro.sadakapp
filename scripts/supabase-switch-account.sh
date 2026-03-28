@@ -9,7 +9,9 @@
 #   export SUPABASE_DB_PASSWORD="..."       # Settings → Database
 #   ./scripts/supabase-switch-account.sh --link
 #
-# Si tu changes de projet Supabase pour l’app, mets à jour VITE_SUPABASE_* (.env + Vercel).
+# Si tu changes de projet Supabase pour l’app : édite .env (VITE_SUPABASE_*), puis :
+#   npm run vercel:sync-supabase-env
+# et adapte supabase/config.toml (project_id).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
