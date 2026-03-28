@@ -1,0 +1,23 @@
+// Top-level build file
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // myPOS Smart SDK repository
+        maven { url 'https://myposdevs.jfrog.io/artifactory/myPOS-Smart-SDK/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

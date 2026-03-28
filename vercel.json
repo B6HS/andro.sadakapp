@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/android/assets/:path*", "destination": "/assets/:path*" },
+    { "source": "/android/sw.js", "destination": "/sw.js" },
+    { "source": "/android/registerSW.js", "destination": "/registerSW.js" },
+    { "source": "/android/workbox-:name.js", "destination": "/workbox-:name.js" },
+    { "source": "/android/manifest.webmanifest", "destination": "/manifest.webmanifest" },
+    { "source": "/android/favicon.svg", "destination": "/favicon.svg" },
+    { "source": "/android/icons/:path*", "destination": "/icons/:path*" },
+    { "source": "/android", "destination": "/index.html" },
+    { "source": "/android/", "destination": "/index.html" },
+    { "source": "/android/:path*", "destination": "/index.html" }
+  ]
+}

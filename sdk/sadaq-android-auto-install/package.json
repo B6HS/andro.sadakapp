@@ -1,0 +1,31 @@
+{
+  "name": "@sadaq-android/auto-install",
+  "version": "0.1.0",
+  "description": "SDK : ouvre le flux PWA /auto-install pour sadaq.app/android (borne + myPOS).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "sadaq.app",
+    "pwa",
+    "auto-install",
+    "mypos"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.sadaq.android'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "app.sadaq.android"
+        minSdk 21
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+
+        // Une URL par association : …/android/{slug}/borne (ex. iqraa, centresocial)
+        buildConfigField "String", "APP_URL", "\"https://sadaq.app/android/iqraa/borne\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'com.mypos:mypos-smart-sdk:1.0.3'
+
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+}
